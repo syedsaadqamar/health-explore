@@ -1,7 +1,8 @@
 import { combineEpics } from 'redux-most';
+import jobEpics from './job/job.epics';
 
 const rootEpic = combineEpics([
-  // all epics will come here
+  jobEpics,
 ]);
 
 export default rootEpic;
