@@ -1,30 +1,20 @@
-import NavBar from './components/NavBar';
-import SearchInput from './components/SearchInput';
-import LeftContent from './components/LeftContent';
-import JobList from './components/JobList';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../styles/Home.module.css'
+import { Provider } from 'react-redux';
+import { compose, createStore, applyMiddleware } from 'redux';
+import { createEpicMiddleware } from 'redux-most';
+import appReducer from './store/app.reducer';
+import appEpic from './store/app.epics';
+import RootNavigator from './RootNavigator';
 
+const epicMiddleware = createEpicMiddleware(appEpic);
+export const store = createStore(
+  appReducer,
+  compose(applyMiddleware(epicMiddleware)),
+);
 
-export default function Home() {
+export default function() {
   return (
-    <div className={styles.container}>
-      <NavBar />
-      <SearchInput />
-      <main className={styles.main}>
-        <LeftContent />
-        <JobList />
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <Provider store={store}>
+      <RootNavigator />
+    </Provider>
   )
 }

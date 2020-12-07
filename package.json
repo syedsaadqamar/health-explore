@@ -8,10 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "most": "^1.9.0",
     "next": "^10.0.3",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-most": "^0.8.0"
   }
 }

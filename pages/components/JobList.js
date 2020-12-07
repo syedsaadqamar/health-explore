@@ -1,7 +1,9 @@
 import styles from './../../styles/Home.module.css';
 import Card from 'react-bootstrap/Card'
+import { connect } from 'react-redux';
 
-export default function JobList() {
+const JobList = ({ jobsList }) => {
+  console.log({ jobsList });
   return (
     <div className={styles.jobList}>
       <Card style={{ width: '18rem' }}>
@@ -17,3 +19,8 @@ export default function JobList() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  jobsList: state.job.jobsList,
+});
+export default connect(mapStateToProps, null)(JobList);
