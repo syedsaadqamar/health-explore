@@ -1,19 +1,18 @@
 import { Modal, Container, Row, Col, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
-export default function DepartmentModal(props) {
+const DepartmentModal = (props) => {
   const [departments, changeDepartments] = useState([]);
-  const { selectedItem, onHide } = props;
+  const { selectedItem, onHide, filteredList } = props;
   const modalProps = {...props};
   delete modalProps.selectedItem;
+  delete modalProps.filteredList;
 
   useEffect(() => {
-    fetch('filters.json')
-    .then(res => res.json())
-    .then((filters) => {    
-      changeDepartments(filters['department'].filter(dept => selectedItem.department.includes(dept.key)));
-    });
-  }, [])
+    if (filteredList && filteredList['department']) {
+      changeDepartments(filteredList['department'].filter(dept => selectedItem.department.includes(dept.key)));
+    }
+  }, []);
 
   return (
     <Modal
@@ -48,3 +47,5 @@ export default function DepartmentModal(props) {
     </Modal>
   );
 }
+
+export default DepartmentModal;

@@ -3,20 +3,16 @@ import styles from './../../styles/Home.module.css';
 import Card from 'react-bootstrap/Card';
 import { Accordion, Button, Badge } from 'react-bootstrap';
 import DepartmentModal from './DepartmentModal';
+import { connect } from 'react-redux';
 
-export default function JobList() {
+const JobList = ({ jobsList, filteredList }) => {
   const [jobs, changeJobs] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [selectedItem, setSelectedItem] = useState(false);
 
   useEffect(() => {
-    fetch('jobs.json')
-    .then(res => res.json())
-    .then((jobs) => {
-      changeJobs(jobs);
-      console.log(jobs)
-    });
-  }, [])
+    changeJobs(jobsList);
+  }, []);
 
   const avatarName = (name) => {
     return name.split(" ").slice(0, 2).map(str => str[0]).join("");
@@ -26,7 +22,6 @@ export default function JobList() {
     setSelectedItem(item);
     setModalShow(true);
   }
-
   return (
     <div className={styles.jobList}>
       {
@@ -47,7 +42,7 @@ export default function JobList() {
                 <div>
                   {
                     job.items.map((item, index) => (
-                      <Accordion>
+                      <Accordion key={index+'-item'}>
                         <Card style={{border: '0px'}}>
                           <Card.Header style={{backgroundColor: '#ffffff', border: '0px'}}>
                             <Accordion.Toggle as={Button} variant="link" eventKey={pIndex + index + 1} style={{width: '100%'}}>
@@ -65,7 +60,7 @@ export default function JobList() {
                                     <b>Department:</b>
                                     <div className="mb-2" style={{width: '500px'}}>
                                       {
-                                        item.department.map((dept, index) => <span>{dept}{index+1 !== item.department.length && ', '}</span>)
+                                        item.department.map((dept, index) => <span key={index}>{dept}{index+1 !== item.department.length && ', '}</span>)
                                       }
                                     </div>
                                   </div>
@@ -102,8 +97,15 @@ export default function JobList() {
       <DepartmentModal
         show={modalShow}
         selectedItem={selectedItem}
+        filteredList={filteredList}
         onHide={() => setModalShow(false)}
       />
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  jobsList: state.job.jobsList,
+  filteredList: state.filter.filteredList,
+});
+export default connect(mapStateToProps, null)(JobList);
