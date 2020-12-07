@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './../../styles/Home.module.css';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import { connect } from 'react-redux';
 // import filters from './../api/filters';
 
 const mappingFilter = {
@@ -9,26 +10,19 @@ const mappingFilter = {
   'experience': 'Experience',
   'department': 'Department'
 }
-export default function LeftContent() {
+const LeftContent = ({ filteredList }) => {
   const [filterData, changeFilterData] = useState([]);
 
   useEffect(() => {
-    fetch('filters.json')
-    .then(res => res.json())
-    .then((filters) => {
-      // const tempFilter = [];
-      // for(const key in filters) {
-      //   tempFilter.push(filters[key]);
-      // }
-      changeFilterData(filters);
-      console.log(filters)
-    });
-  }, [])
+    changeFilterData(filteredList);
+  }, [filteredList]);
+
+  console.log({ filterData });
  
   return (
     <div className={styles.leftContent}>
       {
-        Object.keys(filterData).map((key, index) => (
+        Object.keys(filterData).length > 0 && Object.keys(filterData).map((key, index) => (
           <Card style={{ width: '18rem', marginBottom: '20px' }} key={index}>
             <Card.Body>
               <Card.Title>{mappingFilter[key]}</Card.Title>
@@ -48,3 +42,8 @@ export default function LeftContent() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  filteredList: state.filter.filteredList,
+});
+export default connect(mapStateToProps, null)(LeftContent);
