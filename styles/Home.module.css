@@ -51,11 +51,12 @@
 .leftContent {
   display: flex;
   flex-direction: column;
-  width: 27%;
+  width: 310px;
 }
 
 .jobList {
-  width: 70%;
+  flex: 1;
+  background-color: #ffffff !important;
 }
 
 .main {

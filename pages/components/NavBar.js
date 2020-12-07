@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 export default function NavBar() {
   return (
     <>
-      <Navbar bg="light" expand="lg" className={styles.navBar}>
+      <Navbar bg="light" expand="lg" className={styles.nav}>
         <>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Brand href="#home" className={styles.mainHeading}>HEALTH EXPLORE</Navbar.Brand>
