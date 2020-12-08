@@ -92,7 +92,7 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
                       <Popover id={index}>
                         <Popover.Content>
                           <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('asc', index)}>Asscending</div>
-                          <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('desc', index)}>Decending {val.sortByVal === 'desc' && <span>check</span>}</div>
+                          <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('desc', index)}>Decending</div>
                           <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('', index)}>Remove</div>
                         </Popover.Content>
                       </Popover>
