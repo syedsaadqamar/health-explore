@@ -5,6 +5,8 @@ import {
   SET_JOB_DATA,
   SET_JOB_FILTERED_DATA,
   setJobFilteredDataSuccess,
+  SORT_JOB_DATA,
+  sortJobDataSuccess,
 } from './job.actions';
 
 const setJobDataEpic = ($actions, store) =>
@@ -31,7 +33,14 @@ const setJobFilteredDataEpic = ($actions, store) =>
     return most.of(setJobFilteredDataSuccess(filteredData));
   });
 
+const sortJobDataEpic = ($actions, store) =>
+  $actions.thru(select(SORT_JOB_DATA)).flatMap(action => {
+    // Sorting query here
+    return most.of(sortJobDataSuccess(action.payload));
+  });
+
 export default combineEpics([
   setJobDataEpic,
   setJobFilteredDataEpic,
+  sortJobDataEpic,
 ]);
