@@ -23,7 +23,7 @@ const LeftContent = ({ filteredList }) => {
           <Card style={{ width: '18rem', marginBottom: '20px' }} key={index}>
             <Card.Body>
               <Card.Title>{mappingFilter[key]}</Card.Title>
-              {
+              {/* {
                 filterData[key].map((filterVal, index) => (
                   <Card.Text style={{ margin: '0px', marginBottom: '10px' }} key={index}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -31,7 +31,7 @@ const LeftContent = ({ filteredList }) => {
                     </div>
                   </Card.Text>
                 ))
-              }
+              } */}
             </Card.Body>
           </Card>
         ))

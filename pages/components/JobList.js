@@ -5,6 +5,28 @@ import { Accordion, Button, Badge } from 'react-bootstrap';
 import DepartmentModal from './DepartmentModal';
 import { connect } from 'react-redux';
 
+const sortBy = [
+  {
+    key: 'Location',
+    filterBy: ''
+  },
+  {
+    key: 'Role',
+    filterBy: ''
+  },
+  {
+    key: 'Department',
+    filterBy: ''
+  },
+  {
+    key: 'Education',
+    filterBy: ''
+  },
+  {
+    key: 'Experience',
+    filterBy: ''
+  },
+]
 const JobList = ({ jobsList, filteredList }) => {
   const [jobs, changeJobs] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -24,6 +46,19 @@ const JobList = ({ jobsList, filteredList }) => {
   }
   return (
     <div className={styles.jobList}>
+      <div>
+        <span></span>
+        <>
+          <span>Sort by</span>
+          <div style={{display: 'flex'}}>
+            {
+              sortBy.map((value, index) => (
+                <span key={index}>{value}</span>
+              ))
+            }
+          </div>
+        </>
+      </div>
       {
         jobs.map((job, pIndex) => (
           <Accordion key={pIndex}>
