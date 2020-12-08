@@ -10,7 +10,7 @@ const mappingFilter = {
   'department': 'Department'
 }
 const LeftContent = ({ filteredList }) => {
-  const [filterData, changeFilterData] = useState([]);
+  const [filterData , changeFilterData] = useState([]);
 
   useEffect(() => {
     changeFilterData(filteredList);
@@ -23,15 +23,20 @@ const LeftContent = ({ filteredList }) => {
           <Card style={{ width: '18rem', marginBottom: '20px' }} key={index}>
             <Card.Body>
               <Card.Title>{mappingFilter[key]}</Card.Title>
-              {/* {
+              {
                 filterData[key].map((filterVal, index) => (
-                  <Card.Text style={{ margin: '0px', marginBottom: '10px' }} key={index}>
+                  <div style={{ margin: '0px', marginBottom: '10px' }} key={index}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <span>{filterVal.key} <span style={{ marginTop: '2px' ,marginLeft: '8px', fontSize: '12px', color: '#ccc' }}>{filterVal.doc_count}</span></span>
+                      <span>
+                        <span>{filterVal.key}</span>
+                        <span style={{ marginTop: '2px' ,marginLeft: '8px', fontSize: '12px', color: '#ccc' }}>
+                          {filterVal.doc_count}
+                        </span>
+                      </span>
                     </div>
-                  </Card.Text>
+                  </div>
                 ))
-              } */}
+              }
             </Card.Body>
           </Card>
         ))

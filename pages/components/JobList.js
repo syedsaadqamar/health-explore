@@ -30,9 +30,10 @@ const sortBy = [
 const JobList = ({ jobsList, filteredList }) => {
   const [jobs, changeJobs] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({department: []});
 
   useEffect(() => {
+    console.log(jobsList);
     changeJobs(jobsList);
   }, []);
 
@@ -46,7 +47,7 @@ const JobList = ({ jobsList, filteredList }) => {
   }
   return (
     <div className={styles.jobList}>
-      <div>
+      {/* <div>
         <span></span>
         <>
           <span>Sort by</span>
@@ -58,7 +59,7 @@ const JobList = ({ jobsList, filteredList }) => {
             }
           </div>
         </>
-      </div>
+      </div> */}
       {
         jobs.map((job, pIndex) => (
           <Accordion key={pIndex}>
@@ -69,7 +70,7 @@ const JobList = ({ jobsList, filteredList }) => {
                     <h3 className="mb-0">
                       <Badge variant="secondary">{avatarName(job.name)}</Badge>
                     </h3>
-                    <p style={{marginBottom: '0px', marginLeft: '6px', color: '#8c8b8b'}}>{job.job_title}</p>
+                    <div style={{marginBottom: '0px', marginLeft: '6px', color: '#8c8b8b'}}>{job.job_title}</div>
                   </div>
                 </Accordion.Toggle>
               </Card.Header>
@@ -83,7 +84,7 @@ const JobList = ({ jobsList, filteredList }) => {
                             <Accordion.Toggle as={Button} variant="link" eventKey={pIndex + index + 1} style={{width: '100%'}}>
                               <Card.Body key={index + 'item'} style={Object.assign({}, ((index + 1) !== job.items.length) ? {borderBottom: '1px solid #ccc', paddingBottom: '0px'} : {}, {textAlign: 'left'})}>
                                 <h6 style={{color: '#000'}}>{item.job_title}</h6>
-                                <p style={{fontSize: '14px', color: '#7d7c7c'}}>{item.job_type} | ${item.salary_range[0]} - {item.salary_range[1]} an hour | {item.city}</p>
+                                <div style={{fontSize: '14px', color: '#7d7c7c'}}>{item.job_type} | ${item.salary_range[0]} - {item.salary_range[1]} an hour | {item.city}</div>
                               </Card.Body>
                             </Accordion.Toggle>
                           </Card.Header>
