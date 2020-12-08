@@ -1,6 +1,7 @@
 import {
   SET_JOB_DATA_SUCCESSFULL,
-  SET_JOB_FILTERED_DATA_SUCCESSFULL
+  SET_JOB_FILTERED_DATA_SUCCESSFULL,
+  SORT_JOB_DATA_SUCCESSFULL
 } from './job.actions';
 
 const INITIAL_STATE = {
@@ -17,6 +18,11 @@ const jobReducer = (state = INITIAL_STATE, action) => {
         jobsFilteredData: action.payload,
       };
     case SET_JOB_FILTERED_DATA_SUCCESSFULL:
+      return {
+        ...state,
+        jobsFilteredData: action.payload,
+      };
+    case SORT_JOB_DATA_SUCCESSFULL:
       return {
         ...state,
         jobsFilteredData: action.payload,
