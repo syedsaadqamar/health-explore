@@ -5,7 +5,7 @@ import { Accordion, Button, Badge, OverlayTrigger, Popover } from 'react-bootstr
 import DepartmentModal from './DepartmentModal';
 import { connect } from 'react-redux';
 import { sortByData } from '../constants/constant';
-
+import { timeSince } from '../constants/constant';
 
 const JobList = ({ filteredList, jobsFilteredData }) => {
   const [sortBy, setSortBy] = useState(sortByData);
@@ -113,8 +113,15 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
                           <Card.Header className={styles.accordionCardHeader}>
                             <Accordion.Toggle as={Button} variant="link" eventKey={pIndex + index + 1} className={styles.width100}>
                               <Card.Body key={index + 'item'} style={Object.assign({}, ((index + 1) !== job.items.length) ? {borderBottom: '1px solid #ccc', paddingBottom: '0px'} : {}, {textAlign: 'left'})}>
-                                <h6 className={styles.black}>{item.job_title}</h6>
-                                <div className={styles.accordionCardJobType}>{item.job_type} | ${item.salary_range[0]} - {item.salary_range[1]} an hour | {item.city}</div>
+                                <div className="d-flex justify-content-between">
+                                  <div>
+                                    <h6 className={styles.black}>{item.job_title}</h6>
+                                    <div className={styles.accordionCardJobType}>{item.job_type} | ${item.salary_range[0]} - {item.salary_range[1]} an hour | {item.city}</div>
+                                  </div>
+                                  <div className={styles.timeAgo}>
+                                    {timeSince(item.created)}
+                                  </div>
+                                </div>
                               </Card.Body>
                             </Accordion.Toggle>
                           </Card.Header>
