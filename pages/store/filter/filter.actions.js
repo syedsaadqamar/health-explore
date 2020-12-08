@@ -1,5 +1,5 @@
 export const SET_FILTER_DATA = 'SET_FILTER_DATA';
-export const SET_FILTER_DATA_SUCCESSFULLY = 'SET_FILTER_DATA_SUCCESSFULLY';
+export const SET_FILTER_DATA_SUCCESSFULL = 'SET_FILTER_DATA_SUCCESSFULL';
 
 export const setFilterData = data => ({
   type: SET_FILTER_DATA,
@@ -7,6 +7,6 @@ export const setFilterData = data => ({
 });
 
 export const setFilterDataSuccess = data => ({
-  type: SET_FILTER_DATA_SUCCESSFULLY,
+  type: SET_FILTER_DATA_SUCCESSFULL,
   payload: data,
 });

@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './../../styles/Home.module.css';
 import { connect } from 'react-redux';
-const SearchInput = ({ jobsList }) => {
+import { bindActionCreators } from 'redux';
+import { setJobFilteredData } from '../store/job/job.actions';
+
+const SearchInput = ({ jobsFilteredData, setJobFilteredData }) => {
   const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    setJobs(jobsFilteredData);
+  }, [jobsFilteredData])
 
   const filter = e => {
     const searchText = e.target.value.toLowerCase();
-    const filteredData = [];
-    for(const job of jobsList) {
-      if (job.name.toLowerCase().includes(searchText)) {
-        filteredData.push(job);
-      }
-    }
-    setJobs(filteredData);
+    setJobFilteredData(searchText);
   }
   
   return (
@@ -28,8 +29,16 @@ const SearchInput = ({ jobsList }) => {
   );
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+        setJobFilteredData,
+    },
+    dispatch,
+  );
+
 const mapStateToProps = state => ({
-  jobsList: state.job.jobsList,
+  jobsFilteredData: state.job.jobsFilteredData,
 });
-export default connect(mapStateToProps, null)(SearchInput);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);
 
