@@ -26,7 +26,7 @@ const setJobFilteredDataEpic = ($actions, store) =>
     const { jobsList } = store.getState().job;
     const filteredData = [];
     for(const job of jobsList) {
-      if (job.name.toLowerCase().includes(action.payload.toLowerCase()) || job.job_title.toLowerCase().includes(action.payload.toLowerCase())) {
+      if (job.name.toLowerCase().includes(action.payload) || job.job_title.toLowerCase().includes(action.payload)) {
         filteredData.push(job);
       }
     }
@@ -35,8 +35,9 @@ const setJobFilteredDataEpic = ($actions, store) =>
 
 const sortJobDataEpic = ($actions, store) =>
   $actions.thru(select(SORT_JOB_DATA)).flatMap(action => {
-    // Sorting query here
-    return most.of(sortJobDataSuccess(action.payload));
+    console.log(action);
+    const { jobsList } = store.getState().job;
+    return most.of(sortJobDataSuccess(jobsList));
   });
 
 export default combineEpics([

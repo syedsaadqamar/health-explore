@@ -4,10 +4,12 @@ import Card from 'react-bootstrap/Card';
 import { Accordion, Button, Badge, OverlayTrigger, Popover } from 'react-bootstrap';
 import DepartmentModal from './DepartmentModal';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { sortByData } from '../constants/constant';
 import { timeSince } from '../constants/constant';
+import { sortJobData } from '../store/job/job.actions';
 
-const JobList = ({ filteredList, jobsFilteredData }) => {
+const JobList = ({ filteredList, jobsFilteredData, sortJobData }) => {
   const [sortBy, setSortBy] = useState(sortByData);
   const [jobsCount, setJobsCount] = useState([]);
   const [jobs, changeJobs] = useState([]);
@@ -53,12 +55,13 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
     const updatedSort = closeAllFilter();
     updatedSort[index].sortByVal = type;
     setSortBy([...updatedSort]);
-    fetchDaya();
+    fetchData();
   }
 
-  const fetchDaya = () => {
-    console.log(jobs);
-    console.log(sortBy);
+  const fetchData = () => {
+    // console.log(jobs);
+    // console.log(sortBy);
+    sortJobData(sortBy);
   }
 
   return (
@@ -177,8 +180,16 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
   );
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      sortJobData,
+    },
+    dispatch,
+  );
+
 const mapStateToProps = state => ({
   jobsFilteredData: state.job.jobsFilteredData,
   filteredList: state.filter.filteredList,
 });
-export default connect(mapStateToProps, null)(JobList);
+export default connect(mapStateToProps, mapDispatchToProps)(JobList);

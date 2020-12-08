@@ -16,9 +16,9 @@ export const setJobDataSuccess = data => ({
   payload: data,
 });
 
-export const setJobFilteredData = searchText => ({
+export const setJobFilteredData = selectedValues => ({
   type: SET_JOB_FILTERED_DATA,
-  payload: searchText,
+  payload: selectedValues,
 });
 
 export const setJobFilteredDataSuccess = data => ({
