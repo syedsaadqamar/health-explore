@@ -1,5 +1,6 @@
 import { Modal, Container, Row, Col, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import styles from './../../styles/Home.module.css';
 
 const DepartmentModal = (props) => {
   const [departments, changeDepartments] = useState([]);
@@ -32,8 +33,8 @@ const DepartmentModal = (props) => {
             {
               departments.map((dept, index) => (
                 <Col md={3} key={index}>
-                  <div style={{marginBottom: '4px'}}>
-                    {dept.key} <span style={{color: '#ccc'}}>{dept.doc_count}</span>
+                  <div className="mb-2">
+                    {dept.key} <span className={styles.grey}>{dept.doc_count}</span>
                   </div>
                 </Col>
               ))

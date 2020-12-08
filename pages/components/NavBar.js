@@ -6,18 +6,18 @@ import Image from 'react-bootstrap/Image';
 export default function NavBar() {
   return (
     <>
-      <Navbar bg="light" expand="lg" className={styles.nav}>
+      <Navbar expand="lg" className={styles.navBar}>
         <>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Brand href="#home" className={styles.mainHeading}>HEALTH EXPLORE</Navbar.Brand>
         </>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#profile">PROFILE</Nav.Link>
-            <Nav.Link href="#jobs">JOBS</Nav.Link>
-            <Nav.Link href="#professional-network">PROFESSIONAL NETWORK</Nav.Link>
-            <Nav.Link href="#lounge">LOUNGE</Nav.Link>
-            <Nav.Link href="#salary">SALARY</Nav.Link>
+          <Nav className="m-auto">
+            <Nav.Link href="#profile" className={styles.navLink}>PROFILE</Nav.Link>
+            <Nav.Link href="#jobs" className={styles.navLink}>JOBS</Nav.Link>
+            <Nav.Link href="#professional-network" className={styles.navLink}>PROFESSIONAL NETWORK</Nav.Link>
+            <Nav.Link href="#lounge" className={styles.navLink}>LOUNGE</Nav.Link>
+            <Nav.Link href="#salary" className={styles.navLink}>SALARY</Nav.Link>
           </Nav>
           <>
             <Button variant="outline-primary" className="mr-sm-4">CREATE JOB</Button>

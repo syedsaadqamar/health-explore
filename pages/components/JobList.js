@@ -4,29 +4,9 @@ import Card from 'react-bootstrap/Card';
 import { Accordion, Button, Badge, OverlayTrigger, Popover } from 'react-bootstrap';
 import DepartmentModal from './DepartmentModal';
 import { connect } from 'react-redux';
+import { sortByData } from '../constants/constant';
 
-const sortByData = [
-  {
-    key: 'Location',
-    filterBy: ''
-  },
-  {
-    key: 'Role',
-    filterBy: ''
-  },
-  {
-    key: 'Department',
-    filterBy: ''
-  },
-  {
-    key: 'Education',
-    filterBy: ''
-  },
-  {
-    key: 'Experience',
-    filterBy: ''
-  },
-]
+
 const JobList = ({ filteredList, jobsFilteredData }) => {
   const [sortBy, setSortBy] = useState(sortByData);
   const [jobsCount, setJobsCount] = useState([]);
@@ -83,10 +63,10 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
 
   return (
     <div className={styles.jobList}>
-      <div style={{display: 'flex', justifyContent: 'space-between', padding: '40px 10px'}}>
+      <div className={styles.jobContainer}>
         <span><b>{jobsCount}</b> job postings</span>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <span style={{color: '#ccc'}}>Sort by</span>
+        <div className={styles.sortContent}>
+          <span className={styles.grey}>Sort by</span>
             {
               sortBy.map((val, index) => (
                 <OverlayTrigger
@@ -97,14 +77,14 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
                     overlay={
                       <Popover id={index}>
                         <Popover.Content>
-                          <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('asc', index)}>Asscending</div>
-                          <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('desc', index)}>Decending</div>
-                          <div style={{cursor: 'pointer'}} onClick={() => selectFilterSortBy('', index)}>Remove</div>
+                          <div className={styles.cursorPointer} onClick={() => selectFilterSortBy('asc', index)}>Asscending</div>
+                          <div className={styles.cursorPointer} onClick={() => selectFilterSortBy('desc', index)}>Decending</div>
+                          <div className={styles.cursorPointer} onClick={() => selectFilterSortBy('', index)}>Remove</div>
                         </Popover.Content>
                       </Popover>
                     }
                   >
-                  <span onClick={() => handleClick(index)} style={{marginLeft: '12px', cursor: 'pointer'}}>{val.key}{val.sortByVal && <span style={{color: '#ccc'}}>{':' + val.sortByVal}</span>}</span>
+                  <span className={styles.sortValues} onClick={() => handleClick(index)} >{val.key}{val.sortByVal && <span className={styles.grey}>{':' + val.sortByVal}</span>}</span>
                 </OverlayTrigger>
               ))
             }
@@ -114,13 +94,13 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
         jobs.map((job, pIndex) => (
           <Accordion key={pIndex}>
             <Card>
-              <Card.Header style={{backgroundColor: '#ffffff', border: '0px'}}>
-                <Accordion.Toggle as={Button} variant="link" eventKey={pIndex+1} style={{width: '100%'}}>
-                  <div style={{display: 'flex', alignItems: 'center'}}>
+              <Card.Header className={styles.accordionCardHeader}>
+                <Accordion.Toggle as={Button} variant="link" eventKey={pIndex+1} className={styles.width100}>
+                  <div className="d-flex">
                     <h3 className="mb-0">
                       <Badge variant="secondary">{avatarName(job.name)}</Badge>
                     </h3>
-                    <div style={{marginBottom: '0px', marginLeft: '6px', color: '#8c8b8b'}}>{job.job_title}</div>
+                    <div className={styles.accordionCardTitle}>{job.job_title}</div>
                   </div>
                 </Accordion.Toggle>
               </Card.Header>
@@ -129,37 +109,37 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
                   {
                     job.items.map((item, index) => (
                       <Accordion key={index+'-item'}>
-                        <Card style={{border: '0px'}}>
-                          <Card.Header style={{backgroundColor: '#ffffff', border: '0px'}}>
-                            <Accordion.Toggle as={Button} variant="link" eventKey={pIndex + index + 1} style={{width: '100%'}}>
+                        <Card className="border-0">
+                          <Card.Header className={styles.accordionCardHeader}>
+                            <Accordion.Toggle as={Button} variant="link" eventKey={pIndex + index + 1} className={styles.width100}>
                               <Card.Body key={index + 'item'} style={Object.assign({}, ((index + 1) !== job.items.length) ? {borderBottom: '1px solid #ccc', paddingBottom: '0px'} : {}, {textAlign: 'left'})}>
-                                <h6 style={{color: '#000'}}>{item.job_title}</h6>
-                                <div style={{fontSize: '14px', color: '#7d7c7c'}}>{item.job_type} | ${item.salary_range[0]} - {item.salary_range[1]} an hour | {item.city}</div>
+                                <h6 className={styles.black}>{item.job_title}</h6>
+                                <div className={styles.accordionCardJobType}>{item.job_type} | ${item.salary_range[0]} - {item.salary_range[1]} an hour | {item.city}</div>
                               </Card.Body>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey={pIndex + index + 1}>
                             <Card.Body>
-                              <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%'}}>
-                                <div style={{width: '80%'}}>
-                                  <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                              <div className={styles.accordionCardBody}>
+                                <div className={styles.width80}>
+                                  <div className="d-flex justify-content-around">
                                     <b>Department:</b>
-                                    <div className="mb-2" style={{width: '500px'}}>
+                                    <div className={`mb-2 ${styles.width500px}`}>
                                       {
                                         item.department.map((dept, index) => <span key={index}>{dept}{index+1 !== item.department.length && ', '}</span>)
                                       }
                                     </div>
                                   </div>
-                                  <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                                  <div className="d-flex justify-content-around">
                                     <b>Hours / shifts:</b>
-                                    <div style={{width: '500px'}} className="mb-2">{item.work_schedule}</div>
+                                    <div className={`mb-2 ${styles.width500px}`}>{item.work_schedule}</div>
                                   </div>
-                                  <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                                  <div className="d-flex justify-content-around">
                                     <b>Summary:</b>
-                                    <div style={{width: '500px'}}>{item.description}</div>
+                                    <div className={styles.width500px}>{item.description}</div>
                                   </div>
                                 </div>
-                                <div style={{width: '20%'}}>
+                                <div className={styles.width20}>
                                   <div>
                                     <Button variant="primary" onClick={() => openModal(item)}>Job details</Button>
                                   </div>
