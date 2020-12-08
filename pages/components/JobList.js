@@ -27,15 +27,14 @@ const sortBy = [
     filterBy: ''
   },
 ]
-const JobList = ({ jobsList, filteredList }) => {
+const JobList = ({ filteredList, jobsFilteredData }) => {
   const [jobs, changeJobs] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [selectedItem, setSelectedItem] = useState({department: []});
 
   useEffect(() => {
-    console.log(jobsList);
-    changeJobs(jobsList);
-  }, []);
+    changeJobs(jobsFilteredData);
+  }, [jobsFilteredData]);
 
   const avatarName = (name) => {
     return name.split(" ").slice(0, 2).map(str => str[0]).join("");
@@ -141,7 +140,7 @@ const JobList = ({ jobsList, filteredList }) => {
 }
 
 const mapStateToProps = state => ({
-  jobsList: state.job.jobsList,
+  jobsFilteredData: state.job.jobsFilteredData,
   filteredList: state.filter.filteredList,
 });
 export default connect(mapStateToProps, null)(JobList);

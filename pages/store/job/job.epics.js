@@ -24,7 +24,7 @@ const setJobFilteredDataEpic = ($actions, store) =>
     const { jobsList } = store.getState().job;
     const filteredData = [];
     for(const job of jobsList) {
-      if (job.name.toLowerCase().includes(action.payload)) {
+      if (job.name.toLowerCase().includes(action.payload.toLowerCase()) || job.job_title.toLowerCase().includes(action.payload.toLowerCase())) {
         filteredData.push(job);
       }
     }

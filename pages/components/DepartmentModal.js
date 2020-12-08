@@ -12,7 +12,7 @@ const DepartmentModal = (props) => {
     if (filteredList && filteredList['department']) {
       changeDepartments(filteredList['department'].filter(dept => selectedItem.department.includes(dept.key)));
     }
-  }, []);
+  }, [selectedItem, filteredList]);
 
   return (
     <Modal
