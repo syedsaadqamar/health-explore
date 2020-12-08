@@ -10,7 +10,7 @@ const mappingFilter = {
   'department': 'Department'
 }
 const LeftContent = ({ filteredList }) => {
-  const [filterData = {}, changeFilterData] = useState([]);
+  const [filterData, changeFilterData] = useState([]);
 
   useEffect(() => {
     changeFilterData(filteredList);

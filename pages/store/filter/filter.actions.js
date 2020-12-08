@@ -1,5 +1,5 @@
-export const SET_FILTER_DATA = 'SET_JOB_DATA';
-export const SET_FILTER_DATA_SUCCESSFULLY = 'SET_JOB_DATA_SUCCESSFULLY';
+export const SET_FILTER_DATA = 'SET_FILTER_DATA';
+export const SET_FILTER_DATA_SUCCESSFULLY = 'SET_FILTER_DATA_SUCCESSFULLY';
 
 export const setFilterData = data => ({
   type: SET_FILTER_DATA,
