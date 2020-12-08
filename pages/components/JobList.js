@@ -73,6 +73,12 @@ const JobList = ({ filteredList, jobsFilteredData }) => {
     const updatedSort = closeAllFilter();
     updatedSort[index].sortByVal = type;
     setSortBy([...updatedSort]);
+    fetchDaya();
+  }
+
+  const fetchDaya = () => {
+    console.log(jobs);
+    console.log(sortBy);
   }
 
   return (
